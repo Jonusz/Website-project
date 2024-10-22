@@ -1,0 +1,35 @@
+﻿@model TP_PWEB.Models.VehicleCategory
+
+@{
+    ViewData["Title"] = "Editar";
+}
+
+<h2>Editar categoria</h2>
+
+<form asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+    <div class="card">
+        <div class="card-header">
+            <h4 class="m-1"><b>@ViewBag.NomeCategoria</b></h4>
+        </div>
+
+        <div class="card-body">
+            <h5>Nome</h5>
+            <div class="form-group">
+                <input style="width: 20em !important" asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="card-footer">
+            <input type="submit" value="Confirmar" class="btn btn-primary"
+                   style="width:auto" />
+            <a asp-action="Index"
+               class="btn btn-primary" style="width:auto">Cancelar</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

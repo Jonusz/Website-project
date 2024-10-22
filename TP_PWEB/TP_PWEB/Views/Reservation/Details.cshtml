@@ -1,0 +1,276 @@
+﻿@model TP_PWEB.Models.Reservation
+
+@{
+    ViewData["Title"] = "Detalhes";
+}
+
+<h2>Detalhes da Reserva</h2>
+
+@if (Model.ReservationState == -1) //unaccepted
+{
+    <h4>Reserva rejeitada</h4>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h4 class="m-1">Reserva de <b>@Model.Vehicle.Brand @Model.Vehicle.Model</b></h4>
+        </div>
+
+        <div class="card-body">
+            <h5>Cliente</h5>
+            @Model.Client.FirstName @Model.Client.LastName
+            <br />
+            @Model.Client.Email
+        </div>
+
+        <div class="card-body">
+            <h5>Detalhes</h5>
+            Categoria: @Model.Vehicle.Category.Name
+            <br />
+            @Model.Vehicle.Seats Seats
+            <br />
+            @Model.Vehicle.Kms kilometers
+        </div>
+
+        <div class="card-body">
+            <h5>Localização</h5>
+            @Model.Vehicle.Location
+        </div>
+
+        <div class="card-body">
+            <h5>Preço</h5>
+            <h6>@Model.Price €</h6>
+        </div>
+
+        <div class="card-body">
+            <h5>Data de Levantamento</h5>
+            @Model.PickUpDate
+        </div>
+
+        <div class="card-body">
+            <h5>Data de Entrega</h5>
+            @Model.DeliveryDate
+        </div>
+
+        <div class="card-footer">
+            <a asp-action="Index" class="btn btn-primary" style="width:auto">Voltar</a>
+        </div>
+    </div>
+}
+@if (Model.ReservationState == 0) 
+{
+    <h4>Reserva pendente</h4>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h4 class="m-1">Reserva de <b>@Model.Vehicle.Brand @Model.Vehicle.Model</b></h4>
+        </div>
+
+        <div class="card-body">
+            <h5>Cliente</h5>
+            @Model.Client.FirstName @Model.Client.LastName
+            <br />
+            @Model.Client.Email
+        </div>
+
+        <div class="card-body">
+            <h5>Detalhes</h5>
+            Categoria: @Model.Vehicle.Category.Name
+            <br />
+            @Model.Vehicle.Seats Seats
+            <br />
+            @Model.Vehicle.Kms kilometers
+        </div>
+
+        <div class="card-body">
+            <h5>Localização</h5>
+            @Model.Vehicle.Location
+        </div>
+
+        <div class="card-body">
+            <h5>Preço</h5>
+            <h6>@Model.Price €</h6>
+        </div>
+
+        <div class="card-body">
+            <h5>Data de Levantamento</h5>
+            @Model.PickUpDate
+        </div>
+
+        <div class="card-body">
+            <h5>Data de Entrega</h5>
+            @Model.DeliveryDate
+        </div>
+
+        <div class="card-footer">
+            <a asp-action="Index" class="btn btn-primary" style="width:auto">Voltar</a>
+        </div>
+    </div>
+}
+@if (Model.ReservationState == 1) //accepted
+{
+    <h4>Reserva aceite</h4>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h4 class="m-1">Reserva de <b>@Model.Vehicle.Brand @Model.Vehicle.Model</b></h4>
+        </div>
+
+        <div class="card-body">
+            <h5>Cliente</h5>
+            @Model.Client.FirstName @Model.Client.LastName
+            <br />
+            @Model.Client.Email
+        </div>
+
+        <div class="card-body">
+            <h5>Detalhes</h5>
+            Categoria: @Model.Vehicle.Category.Name
+            <br />
+            @Model.Vehicle.Seats Seats
+            <br />
+            @Model.Vehicle.Kms kilometers
+        </div>
+
+        <div class="card-body">
+            <h5>Localização</h5>
+            @Model.Vehicle.Location
+        </div>
+
+        <div class="card-body">
+            <h5>Preço</h5>
+            <h6>@Model.Price €</h6>
+        </div>
+
+        <div class="card-body">
+            <h5>Data de Levantamento</h5>
+            @Model.PickUpDate
+        </div>
+
+        <div class="card-body">
+            <h5>Data de Entrega</h5>
+            @Model.DeliveryDate
+        </div>
+
+        <div class="card-body">
+            <h5>Funcionário que efetuou a entrega</h5>
+            @Model.DeliveryWorker.FirstName @Model.DeliveryWorker.LastName
+        </div>
+
+        <div class="card-body">
+            <h5>Danificado no levantamento?</h5>
+            @if (Model.DemageInPickup)
+            {
+                <span>Sim</span>
+            }
+            else
+            {
+                <span>Não</span>
+            }
+        </div>
+
+        <div class="card-body">
+            <h5>Observações</h5>
+                @Model.Observations
+        </div>
+
+        <div class="card-footer">
+            <a asp-action="Index" class="btn btn-primary" style="width:auto">Voltar</a>
+        </div>
+    </div>
+}
+@if (Model.ReservationState == 2) //closed
+{
+    <h4>Reserva encerrada</h4>
+
+        <div class="card mb-3">
+            <div class="card-header">
+                <h4 class="m-1">Reserva de <b>@Model.Vehicle.Brand @Model.Vehicle.Model</b></h4>
+            </div>
+
+        <div class="card-body">
+                <h5>Cliente</h5>
+            @Model.Client.FirstName @Model.Client.LastName
+                <br />
+            @Model.Client.Email
+            </div>
+
+            <div class="card-body">
+                <h5>Detalhes</h5>
+                Categoria: @Model.Vehicle.Category.Name
+                <br />
+            @Model.Vehicle.Seats Seats
+                <br />
+            @Model.Vehicle.Kms kilometers
+            </div>
+
+            <div class="card-body">
+                <h5>Localização</h5>
+            @Model.Vehicle.Location
+            </div>
+
+            <div class="card-body">
+                <h5>Preço</h5>
+                <h6>@Model.Price €</h6>
+            </div>
+
+            <div class="card-body">
+                <h5>Data de Levantamento</h5>
+            @Model.PickUpDate
+            </div>
+
+            <div class="card-body">
+                <h5>Data de Entrega</h5>
+            @Model.DeliveryDate
+            </div>
+
+            <div class="card-body">
+                <h5>Funcionário que efetuou a entrega</h5>
+            @Model.DeliveryWorker.FirstName @Model.DeliveryWorker.LastName
+            </div>
+
+            <div class="card-body">
+                <h5>Funcionário que recebeu o veículo</h5>
+            @Model.PickUpWorker.FirstName @Model.PickUpWorker.LastName
+            </div>
+
+            <div class="card-body">
+                <h5>Danificado no levantamento?</h5>
+            @if (Model.DemageInPickup)
+            {
+                        <span>Sim</span>
+            }
+            else
+            {
+                        <span>Não</span>
+            }
+            </div>
+
+            <div class="card-body">
+                <h5>Danificado na entrega?</h5>
+            @if (Model.DemageInDelivery)
+            {
+                        <span>Sim</span>
+            }
+            else
+            {
+                        <span>Não</span>
+            }
+            </div>
+
+            <div class="card-body">
+                <h5>Classificação</h5>
+                <div style="display:flex; align-items:center">
+                    @Model.Clasyfication*
+                </div>
+            </div>
+
+            <div class="card-body">
+                <h5>Observações</h5>
+                @Model.Observations
+            </div>
+
+            <div class="card-footer">
+                <a asp-action="Index" class="btn btn-primary" style="width:auto">Voltar</a>
+            </div>
+        </div>
+}

@@ -1,0 +1,78 @@
+﻿@model TP_PWEB.Models.Vehicle
+
+@{
+    ViewData["Title"] = "Eliminar";
+}
+
+<h2>Eliminar Registo de Veículo</h2>
+
+@if (!ViewBag.PodeApagar)
+{
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Veículo
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Brand @Model.Model
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            Quilómetros
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Kms
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            Localização
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Location
+        </dd>
+    </dl>
+
+    <p class="alert alert-danger">
+        Não é possivel efetuar esta operação visto que ainda existem reservas em aberto associadas a este veículo.
+    </p>
+}
+else
+{
+    <h4>Tem a certeza que quer apagar a seguinte empresa?</h4>
+    <div>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                Veículo
+            </dt>
+            <dd class="col-sm-10">
+                @Model.Brand @Model.Model
+            </dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">
+                Quilómetros
+            </dt>
+            <dd class="col-sm-10">
+                @Model.Kms
+            </dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">
+                Localização
+            </dt>
+            <dd class="col-sm-10">
+                @Model.Location
+            </dd>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Remover" class="btn btn-danger" />
+            <a class="btn btn-primary" asp-action="Index">Cancelar</a>
+        </form>
+    </div>
+}
+

@@ -1,0 +1,62 @@
+﻿@model TP_PWEB.Models.ApplicationUser
+
+@{
+    ViewData["Title"] = "Eliminar";
+}
+
+<h2>Eliminar Utilizador</h2>
+
+@if (!ViewBag.PodeApagar)
+{
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Email
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Email
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            Nome
+        </dt>
+        <dd class="col-sm-10">
+            @Model.FirstName @Model.LastName
+        </dd>
+    </dl>
+
+    <p class="alert alert-danger">
+        Não é possivel efetuar esta operação visto que o utilizador @Model.FirstName @Model.LastName está associado a reservas.
+    </p>
+}
+else
+{
+    <h4>Tem a certeza que quer apagar o seguinte utilizador?</h4>
+    <div>
+        <hr />
+
+        <dl class="row">
+            <dt class="col-sm-2">
+                Email
+            </dt>
+            <dd class="col-sm-10">
+                @Model.Email
+            </dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">
+                Nome
+            </dt>
+            <dd class="col-sm-10">
+                @Model.FirstName @Model.LastName
+            </dd>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Remover" class="btn btn-danger" />
+            <a class="btn btn-primary" asp-action="Index">Cancelar</a>
+        </form>
+    </div>
+}

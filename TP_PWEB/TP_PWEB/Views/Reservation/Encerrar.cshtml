@@ -1,0 +1,140 @@
+﻿@model TP_PWEB.Models.Reservation
+
+@{
+    ViewData["Title"] = "Fechar Reserva";
+}
+
+<h2>Encerrar Reserva</h2>
+
+<div class="card mb-3">
+    <div class="card-header">
+        <h4 class="m-1">Reserva de <b>@Model.Vehicle.Brand @Model.Vehicle.Model</b></h4>
+    </div>
+
+    <div class="card-body">
+        <h5>Cliente</h5>
+        @Model.Client.FirstName @Model.Client.LastName
+        <br />
+        @Model.Client.Email
+    </div>
+
+    <div class="card-body">
+        <h5>Detalhes</h5>
+        Categoria: @Model.Vehicle.Category.Name
+        <br />
+        @Model.Vehicle.Seats seats
+        <br />
+        @Model.Vehicle.Kms kilometers
+    </div>
+
+    <div class="card-body">
+        <h5>Localização</h5>
+        @Model.Vehicle.Location
+    </div>
+
+    <div class="card-body">
+        <h5>Preço</h5>
+        <h6>@Model.Price €</h6>
+    </div>
+
+    <div class="card-body">
+        <h5>Data de Levantamento</h5>
+        @Model.PickUpDate
+    </div>
+
+    <div class="card-body">
+        <h5>Data de Entrega</h5>
+        @Model.DeliveryDate
+    </div>
+
+    <div class="card-body">
+        <h5>Funcionário que efetuou a entrega</h5>
+        @Model.DeliveryWorker.FirstName @Model.DeliveryWorker.LastName
+    </div>
+
+    <div class="card-body">
+        <h5>Danificado no levantamento?</h5>
+        @if (Model.DemageInPickup)
+        {
+            <span>Sim</span>
+        }
+        else
+        {
+            <span>Não</span>
+        }
+    </div>
+
+    <div class="card-body">
+        <h5>Observações</h5>
+            @Model.Observations
+    </div>
+
+    <hr />
+
+    <form asp-action="Encerrar">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="ClientId" />
+        <input type="hidden" asp-for="VehicleId" />
+        <input type="hidden" asp-for="PickUpDate" />
+        <input type="hidden" asp-for="DeliveryDate" />
+        <input type="hidden" asp-for="Price" />
+        <input type="hidden" asp-for="DeliveryWorkerId" />
+        <input type="hidden" asp-for="Observations" />
+
+        <div class="card-body">
+            <h5>Classificação dada pelo cliente</h5>
+            <div class="form-group">
+                <input style="width: 10em !important" type="number" name="classificacao" class="form-control" />
+                <span asp-validation-for="Clasyfication" class="text-danger"></span>
+            </div>
+            @if (ViewBag.ErroClassificacao != null)
+            {
+                <li class="text-danger">
+                    @ViewBag.ErroClassificacao
+                </li>
+            }
+        </div>
+
+        <div class="card-body">
+            <h5>Quilómetros do veículo</h5>
+            <div class="form-group">
+                <input style="width: 10em !important" type="number" name="kms" class="form-control" />
+                <span asp-validation-for="Kms" class="text-danger"></span>
+            </div>
+            @if(ViewBag.ErroKms != null){
+                <li class="text-danger">
+                    @ViewBag.ErroKms
+                </li>
+            }
+        </div>
+
+        <div class="card-body">
+            <h5>Danos</h5>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="DemageInDelivery" /> Veículo danificado?
+                </label>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <h5>Observações</h5>
+            <div class="form-group">
+                <textarea style="width: 30em !important" name="observacoes" class="form-text"></textarea>
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <input type="submit" value="Confirmar" class="btn btn-success me-2" style="width:auto" />
+            <a asp-action="Index" class="btn btn-primary" style="width:auto">Cancelar</a>
+        </div>
+    </form>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

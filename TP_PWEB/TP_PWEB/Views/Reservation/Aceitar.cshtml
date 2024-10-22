@@ -1,0 +1,91 @@
+﻿@model TP_PWEB.Models.Reservation
+
+@{
+    ViewData["Title"] = "Confirmar Reserva";
+}
+
+<h2>Confirm reservation</h2>
+
+<div class="card mb-3">
+    <div class="card-header">
+        <h4 class="m-1">Reserva de <b>@Model.Vehicle.Brand @Model.Vehicle.Model</b></h4>
+    </div>
+
+    <div class="card-body">
+        <h5>Client</h5>
+        @Model.Client.FirstName @Model.Client.LastName
+        <br />
+        @Model.Client.Email
+    </div>
+
+    <div class="card-body">
+        <h5>Details</h5>
+        Categoria: @Model.Vehicle.Category.Name
+        <br />
+        @Model.Vehicle.Seats Seats
+        <br />
+        @Model.Vehicle.Kms kilometers
+    </div>
+
+    <div class="card-body">
+        <h5>Location</h5>
+        @Model.Vehicle.Location
+    </div>
+
+    <div class="card-body">
+        <h5>Price</h5>
+        <h6>@Model.Price €</h6>
+    </div>
+
+    <div class="card-body">
+        <h5>Pick up date</h5>
+        @Model.PickUpDate
+    </div>
+
+    <div class="card-body">
+        <h5>Delivery date</h5>
+        @Model.DeliveryDate
+    </div>
+
+    <hr />
+
+    <form asp-action="Aceitar">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="ClientId" />
+        <input type="hidden" asp-for="VehicleId" />
+        <input type="hidden" asp-for="Vehicle" />
+        <input type="hidden" asp-for="PickUpDate" />
+        <input type="hidden" asp-for="DeliveryDate" />
+        <input type="hidden" asp-for="Price" />
+
+        <div class="card-body">
+            <h5>Danos</h5>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="DemageInPickup" /> Veículo danificado?
+                </label>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <h5>Observações</h5>
+            <div class="form-group">
+                <textarea style="width: 30em !important" name="observacoes" class="form-text"></textarea>
+                <span asp-validation-for="Observations" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <input type="submit" value="Confirmar" class="btn btn-success me-2" style="width:auto" />
+            <a asp-action="Details" class="btn btn-primary" style="width:auto">Cancelar</a>
+        </div>
+    </form>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

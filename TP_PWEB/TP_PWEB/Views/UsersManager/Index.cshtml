@@ -1,0 +1,78 @@
+﻿@using TP_PWEB.Models
+@model IEnumerable<TP_PWEB.ViewModels.UserManagerViewModel>
+@{
+	ViewData["Title"] = "Gestão de Utilizadores";
+}
+
+<h2>Gestão de Utilizadores</h2>
+
+<div class="row mt-3">
+    <div class="col-md-auto">
+        <form method="post">
+            <div class="input-group" style="display:flex; align-items:center">
+                Pesquisa: 
+                <input style="width:15em !important" class="form-control ms-1 me-3" type="text" id="TextoAPesquisar" name="TextoAPesquisar" placeholder="Utilizador a pesquisar" value="@ViewData["TextoPesquisado"]">
+
+				Estado: 
+                <select style="width:10em !important" class="form-select ms-1 me-3" name="estado" asp-items="ViewBag.ListaEstados"></select>
+
+                Cargos:
+				<select style="width:10em !important" class="form-select ms-1" name="cargo" asp-items="ViewBag.ListaCargos"></select>
+
+                <button type="submit" class="btn btn-default">
+                    <img src="img/search.png">
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@if(ViewBag.Total == 0)
+{
+	<p class="alert alert-warning mt-3">
+		Sem resultados da pesquisa
+	</p>
+}
+else
+{
+	<table style="vertical-align: middle" class="table table-striped table-hover table-bordered mt-4">
+		<caption style="caption-side:top">@ViewData["Resultado"]</caption>
+		<thead>
+			<tr>
+				<th>Nome</th>
+				<th>Email</th>
+				<th>Cargos</th>
+				<th style="text-align:center">Ativo</th>
+				<th style="text-align:center">Ações</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var user in Model)
+			{
+				<tr>
+					<td>@user.FirstName @user.LastName</td>
+					<td>@user.UserName</td>
+					<td>@string.Join(", ", user.RolesNames.ToList())</td>
+					<td style="text-align:center">
+						@if (user.Active)
+						{
+							<text>Sim</text>
+						}
+						else
+						{
+							<text>Não</text>
+						}
+					</td>
+					<td style="text-align:center">
+						<a class="btn btn-primary" 
+							asp-controller="UsersManager"
+							asp-action="Edit"
+							asp-route-userId="@user.UserId">
+								Editar
+						</a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}

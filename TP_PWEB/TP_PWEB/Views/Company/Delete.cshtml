@@ -1,0 +1,45 @@
+﻿@model TP_PWEB.Models.Company
+
+@{
+    ViewData["Title"] = "Eliminar";
+}
+
+<h2>Eliminar empresa</h2>
+
+@if (!ViewBag.PodeApagar)
+{
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+    </dl>
+
+    <p class="alert alert-danger">
+        Não é possivel efetuar esta operação visto que ainda existem veiculos registados na plataforma associados à empresa @Model.Name.
+    </p>
+}
+else
+{
+    <h4>Tem a certeza que quer apagar a seguinte empresa?</h4>
+    <div>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Remover" class="btn btn-danger" />
+            <a class="btn btn-primary" asp-action="Index">Cancelar</a>
+        </form>
+    </div>
+}

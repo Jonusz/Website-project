@@ -1,0 +1,101 @@
+﻿@model IEnumerable<TP_PWEB.Models.Vehicle>
+@* IEnumerable<TP_PWEB.Models.Veiculo> *@
+@{
+    ViewData["Title"] = "PWEB";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+<style>
+    h6 { margin-bottom: 0px; }
+</style>
+
+<div id="carouselDestaques" class="carousel slide m-0" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active banner">
+            <div class="container">
+                <div class="carousel-caption">
+                    <br />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5 pt-5 text-start">
+    <form method="post">
+        <div class="input-group text-black mb-4">
+            <div class="container">
+                <div class="row" style="display:flex; flex-wrap:nowrap; justify-content:center;">
+                    <div class="col-12">
+                        <div class="row mb-1 justify-content-end">
+                            <div class="col-3" style="display: flex; align-items: center;">
+                                <h6>Pesquisa:</h6>
+                                <input class="form-control ms-1" type="text" id="TextoAPesquisar" name="TextoAPesquisar" placeholder="Veículo a pesquisar" value="@ViewData["TextoPesquisado"]">
+                            </div>
+                            <div class="col-3" style="display: flex; align-items: center;">
+                                <h6>Empresa:</h6>
+                                <select class="form-select ms-1" name="empresaId" asp-items="ViewBag.ListaEmpresas"></select>
+                            </div>
+                            <div class="col-3" style="display: flex; align-items: center;">
+                                <h6>Categoria:</h6>
+                                <select class="form-select ms-1" name="categoriaId" asp-items="ViewBag.ListaCategorias"></select>
+                            </div>
+                            <div class="col-3" style="display: flex; align-items: center;">
+                                <h6>Ordem:</h6>
+                                <select class="form-select ms-1" name="ordem" asp-items="ViewBag.ListaOrdem"></select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-1" style="display:contents">
+                        <button type="submit" class="btn btn-default" style="padding-right:0px;">
+                            <img src="img/search.png">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <table style="vertical-align: middle" class="table table-striped table-hover mt-3">
+        <thead>
+            <tr>
+                <th>Veículo</th>
+                <th>Categoria</th>
+                <th>Lugares</th>
+                <th>Localização</th>
+                <th>Empresa</th>
+                <th>Preço</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Brand @item.Model
+                    </td>
+                    <td>
+                        @item.Category.Name
+                    </td>
+                    <td>
+                        @item.Seats
+                    </td>
+                    <td>
+                        @item.Location
+                    </td>
+                    <td>
+                        @item.Company.Name (@item.Company.rating*)
+                    </td>
+                    <td>
+                        @item.Price €/dia
+                    </td>
+                    <td style="text-align:center">
+                        <a class="btn btn-success" asp-action="Details" asp-route-id="@item.Id">Ver oferta</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

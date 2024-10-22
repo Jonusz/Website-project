@@ -1,0 +1,50 @@
+﻿@model TP_PWEB.ViewModels.CompanyDetailsViewModel
+
+@{
+    ViewData["Title"] = "Detalhes da Empresa";
+}
+
+<h3>Detalhes da Empresa</h3>
+
+<div class="card">
+    <div class="card-header">
+        <h4 class="m-1"><b>@Model.Company.Name</b></h4>
+    </div>
+
+    <div class="card-body">
+        <h5>Classificação</h5>
+        @if(Model.Company.rating == null)
+        {
+            <span>----</span>
+        }
+        else
+        {
+            <div style="display:flex; align-items:center">
+                @Html.DisplayFor(modelItem => Model.Company.rating)*
+            </div>
+        }
+    </div>
+
+    <div class="card-body">
+        <h5>Active Company</h5>
+        @if (Model.Company.Active)
+		{
+			<text>Yes</text>
+        }
+        else
+        {
+							<text>No</text>
+        }
+    </div>
+
+	<div class="card-body">
+		<h5>Total de Veiculos na Empresa</h5>
+		@Model.TotalVehicles
+	</div>
+
+    <div class="card-footer">
+		<a asp-action="Delete" asp-route-id="@Model.Company.Id" class="btn btn-danger" style="width:auto">Remover</a>
+        <a asp-action="Edit" class="btn btn-primary ms-1" asp-route-id="@Model.Company.Id">Editar</a>
+        <a asp-action="Index" class="btn btn-primary ms-1" style="width:auto">Voltar</a>
+    </div>
+</div>

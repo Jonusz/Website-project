@@ -1,0 +1,90 @@
+﻿@model TP_PWEB.Models.Vehicle
+
+@{
+    ViewData["Title"] = "Editar Veículo";
+}
+
+<h2>Editar Registo de Veículo</h2>
+
+<form asp-action="Edit" autocomplete="off">
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<input type="hidden" asp-for="Id" />
+    <div class="card mb-3">
+        <div class="card-header">
+            <h4 class="m-1">Editar Detalhes do Veículo</h4>
+        </div>
+
+        <div class="card-body">
+            <h5>Marca</h5>
+            <div class="form-group">
+                <input style="width: 20em !important" asp-for="Brand" class="form-control" autocomplete="off" />
+                <span asp-validation-for="Brand" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <h5>Modelo</h5>
+            <div class="form-group">
+                <input style="width: 20em !important" asp-for="Model" class="form-control" autocomplete="off" />
+                <span asp-validation-for="Model" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <h5>Categoria</h5>
+            <div class="form-group">
+                <select style="width: 20em !important" asp-for="CategoryID" class="form-select" asp-items="ViewBag.CategoriaId"></select>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <h5>Número de lugares</h5>
+            <div class="form-group">
+                <input style="width: 20em !important" asp-for="Seats" class="form-control" />
+                <span asp-validation-for="Seats" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <h5>Quilómetros</h5>
+            <div class="form-group">
+                <input style="width: 20em !important" asp-for="Kms" class="form-control" />
+                <span asp-validation-for="Kms" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <h5>Localização</h5>
+            <div class="form-group">
+                <input style="width: 20em !important" asp-for="Location" class="form-control" autocomplete="off" />
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <h5>Preço (€)</h5>
+            <div class="form-group">
+                <input style="width: 20em !important" asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <h5>Disponibilidade</h5>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Available" /> Veículo Disponivel?
+                </label>
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <input type="submit" value="Confirmar" class="btn btn-primary" style="width:auto" />
+            <a asp-action="Index" class="btn btn-primary" style="width:auto">Cancelar</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

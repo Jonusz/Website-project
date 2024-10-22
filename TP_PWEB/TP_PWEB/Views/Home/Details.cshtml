@@ -1,0 +1,44 @@
+﻿@model TP_PWEB.Models.Vehicle
+
+@{
+    ViewData["Title"] = "Detalhes do veículo";
+}
+
+<div class="card mb-3">
+	<div class="card-header">
+		<h4 class="m-1"><b>@Model.Brand @Model.Model</b></h4>
+	</div>
+
+    <div class="card-body">
+        <h5>Categoria</h5>
+        @Model.Category.Name
+    </div>
+
+    <div class="card-body">
+        <h5>Detalhes</h5>
+        @Model.Seats Seats
+        <br />
+        @Model.Kms kilometers
+    </div>
+
+    <div class="card-body">
+        <h5>Localização</h5>
+        @Model.Location
+    </div>
+
+    <div class="card-body">
+        <h5>Empresa</h5>
+        @Model.Company.Name
+        (@Html.DisplayFor(modelItem => Model.Company.rating)*)
+    </div>
+
+    <div class="card-body">
+        <h5>Preço</h5>
+        <h6>@Model.Price € <span class="fw-light">/dia</span></h6>
+    </div>
+
+	<div class="card-footer">
+		<a asp-controller="Reservation" asp-action="Create" class="btn btn-primary" asp-route-veiculoId="@Model.Id">Reservar</a>
+		<a asp-action="Index" class="btn btn-primary ms-2" style="width:auto">Voltar</a>
+	</div>
+</div>

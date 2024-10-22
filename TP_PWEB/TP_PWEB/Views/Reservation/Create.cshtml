@@ -1,0 +1,79 @@
+﻿@model TP_PWEB.Models.Reservation
+
+@{
+    ViewData["Title"] = "Criar Reserva";
+}
+
+<div class="card mb-3">
+    <div class="card-header">
+        <h4 class="m-1"><b>@Model.Vehicle.Brand @Model.Vehicle.Model</b></h4>
+    </div>
+
+    <div class="card-body">
+        <h5>Category</h5>
+        @Model.Vehicle.Category.Name
+    </div>
+
+    <div class="card-body">
+        <h5>Details</h5>
+        @Model.Vehicle.Seats Seats
+        <br />
+        @Model.Kms kilometers
+    </div>
+
+    <div class="card-body">
+        <h5>Location</h5>
+        @Model.Vehicle.Location
+    </div>
+
+    <div class="card-body">
+        <h5>Company</h5>
+        @Model.Vehicle.Company.Name
+        (@Html.DisplayFor(modelItem => Model.Vehicle.Company.rating)*)
+    </div>
+
+    <div class="card-body">
+        <h5>Price</h5>
+        <h6>@Model.Vehicle.Price € <span class="fw-light">/dia</span></h6>
+    </div>
+</div>
+
+<form method="post" autocomplete="off">
+    <div class="card mb-3">
+        <div class="card-header">
+            <h4 class="m-1">Reservar @Model.Vehicle.Brand @Model.Vehicle.Model</h4>
+        </div>
+
+        <div class="card-body" style="display:flex; align-items:baseline;">
+            <h5 class="me-1">De:</h5>
+            <div class="form-group">
+                <input style="width:15em !important" asp-for="PickUpDate" class="form-control" />
+                <span asp-validation-for="PickUpDate" class="text-danger"></span>
+            </div>
+
+            <h5 class ="ms-5 me-1">Até:</h5>
+            <div class="form-group">
+                <input style="width:15em !important" asp-for="DeliveryDate" class="form-control" />
+                <span asp-validation-for="DeliveryDate" class="text-danger"></span>
+            </div>
+        </div>
+
+        @if(ViewBag.Erro != "")
+        {
+            <div class="card-body" style="padding-top: 0px;">
+                <li class="text-danger">
+                    @ViewBag.Erro
+                </li>
+            </div>
+        }
+
+        <div class="card-footer">
+            <input type="submit" value="Confirmar" class="btn btn-primary" style="width:auto" />
+            <a asp-controller="Home" asp-action="Details" asp-route-id="@Model.Vehicle.Id" class="btn btn-primary" style="width:auto">Cancelar</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

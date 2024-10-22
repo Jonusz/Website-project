@@ -1,0 +1,93 @@
+﻿@model TP_PWEB.ViewModels.CompanyMenagerViewModel
+
+@{
+    ViewData["Title"] = "Adicionar Empresa";
+}
+
+<h2>Adicionar Empresa</h2>
+
+<form method="post" autocomplete="off">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="m-1">Criar Empresa</h4>
+        </div>
+
+        <div class="card-body">
+            <h5>Nome</h5>
+            <div class="form-group">
+                <input placeholder="Introduza o nome da empresa" style="width: 20em !important" asp-for="NomeEmpresa" class="form-control" />
+                <span asp-validation-for="NomeEmpresa" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <h5>Ativo</h5>
+            <div class="form-check m-1">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="AtivoEmpresa" /> Empresa Ativa?
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" style="margin-top:.5em">
+        <div class="card-header">
+            <h4 class="m-1">Criar perfil de Gestor associado à Empresa</h4>
+        </div>
+
+        <div class="card-body">
+            <h5>Email</h5>
+            <div class="form-group">
+                <input type="email" style="width: 20em !important" asp-for="EmailGestor" class="form-control" autocomplete="off" />
+                <span asp-validation-for="EmailGestor" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <h5>Nome</h5>
+            <div class="form-group">
+                <label asp-for="PrimeiroNomeGestor" class="control-label"></label>
+                <input style="width: 20em !important" asp-for="PrimeiroNomeGestor" class="form-control" autocomplete="off" />
+                <span asp-validation-for="PrimeiroNomeGestor" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="UltimoNomeGestor" class="control-label"></label>
+                <input style="width: 20em !important" asp-for="UltimoNomeGestor" class="form-control" autocomplete="off" />
+                <span asp-validation-for="UltimoNomeGestor" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <h5>Ativo</h5>
+            <div class="form-check m-1">
+                <label class="form-check-label" asp-for="AtivoGestor">Utilizador Ativo?</label>
+                <input asp-for="AtivoGestor" class="form-check-input" />
+            </div>
+        </div>
+
+        <div class="card-body">
+            <h5>Password</h5>
+            <div class="form-group">
+                <input type="password" style="width: 20em !important" asp-for="PasswordGestor" class="form-control" autocomplete="new-password" />
+                <span asp-validation-for="PasswordGestor" class="text-danger"></span>
+            </div>
+
+            @foreach(var erro in ViewBag.ListaErros)
+            {
+                <li class="text-danger">
+                    @erro
+                </li>
+            }
+        </div>
+    </div>
+
+    <div class="m-3">
+        <input type="submit" value="Confirmar" class="btn btn-primary"style="width:auto" />
+        <a asp-action="Index" class="btn btn-primary" style="width:auto">Cancelar</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
