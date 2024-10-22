@@ -38,3 +38,5 @@ To run the project locally, follow these steps:
 3. **Administrator Login Credentials**:  
    - **Email**: admin@localhost.com  
    - **Password**: Erasmus_123
+
+![animacja](https://github.com/user-attachments/assets/e507b455-cffe-4389-9d05-d2183d1ba4b4)
